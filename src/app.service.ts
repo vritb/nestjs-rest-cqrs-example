@@ -1,7 +1,7 @@
 import { OnModuleDestroy, OnModuleInit } from '@nestjs/common';
 import { Connection, createConnection } from 'typeorm';
 
-import { AccountEntity } from 'src/accounts/infrastructure/entities/account.entity';
+import { AccountEntity } from 'src/accounts/storagelayer/entities/account.entity';
 
 class DBConfig {
   readonly host: string;
@@ -11,16 +11,6 @@ class DBConfig {
   readonly password: string;
   readonly synchronize: boolean;
   readonly logging: boolean;
-}
-
-class RedisConfig {
-  readonly host: string;
-  readonly port: number;
-}
-
-class RedisClusterConfig {
-  readonly master: RedisConfig;
-  readonly slave: RedisConfig;
 }
 
 export class RabbitMQConfig {
@@ -38,23 +28,6 @@ export class AppService implements OnModuleInit, OnModuleDestroy {
     return PORT && Number(PORT) ? Number(PORT) : 5000;
   }
 
-  static redisClusterConfig(): RedisClusterConfig {
-    const { REDIS_MASTER_PORT, REDIS_MASTER_HOST } = process.env;
-    const masterHost = REDIS_MASTER_HOST ? REDIS_MASTER_HOST : 'localhost';
-    const masterPort = Number(REDIS_MASTER_PORT)
-      ? Number(REDIS_MASTER_PORT)
-      : 6379;
-    const master: RedisConfig = { host: masterHost, port: masterPort };
-
-    const { REDIS_SLAVE_HOST, REDIS_SLAVE_PORT } = process.env;
-    const slaveHost = REDIS_SLAVE_HOST ? REDIS_SLAVE_HOST : 'localhost';
-    const slavePort = Number(process.env.REDIS_SLAVE_PORT)
-      ? Number(REDIS_SLAVE_PORT)
-      : 6379;
-    const slave: RedisConfig = { host: slaveHost, port: slavePort };
-
-    return { master, slave };
-  }
 
   static rabbitMQConfig(): RabbitMQConfig {
     return {
@@ -79,9 +52,9 @@ export class AppService implements OnModuleInit, OnModuleDestroy {
     return {
       host: process.env.DATABASE_HOST || 'localhost',
       port: parseInt(process.env.DATABASE_PORT, 10) || 3306,
-      database: process.env.DATABASE_NAME || 'nest',
-      username: process.env.DATABASE_USER || 'root',
-      password: process.env.DATABASE_PASSWORD || 'test',
+      database: process.env.DATABASE_NAME || 'cqrsaccounts',
+      username: process.env.DATABASE_USER || 'cqrsaccounts',
+      password: process.env.DATABASE_PASSWORD || 'cqrsaccounts',
       synchronize: 'true' === process.env.DATABASE_SYNC || true,
       logging: 'true' === process.env.DATABASE_LOGGING || true,
     };

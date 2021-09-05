@@ -1,0 +1,3 @@
+*.param.dto.ts      http request parameter coded in URL
+*.query.dto.ts      ????
+*.body.dto.ts       used with @Body()     

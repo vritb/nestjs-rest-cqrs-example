@@ -1,3 +1,4 @@
+// An Account as such
 export class Account {
   readonly id: string;
   readonly name: string;
@@ -8,6 +9,7 @@ export class Account {
   readonly closedAt: Date | null;
 }
 
+// An account in a collection of accounts
 export class ItemInAccounts {
   readonly id: string;
   readonly name: string;
@@ -18,6 +20,7 @@ export class ItemInAccounts {
   readonly closedAt: Date | null;
 }
 
+// Accounts in a collection are distinguished from an account not in a collection
 export class Accounts extends Array<ItemInAccounts> {}
 
 export interface AccountQuery {

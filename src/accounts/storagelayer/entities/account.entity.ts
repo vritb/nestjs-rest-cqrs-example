@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
-import { BaseEntity } from 'src/accounts/infrastructure/entities/base.entity';
+import { BaseEntity } from 'src/accounts/storagelayer/entities/base.entity';
 
 @Entity()
 export class AccountEntity extends BaseEntity {

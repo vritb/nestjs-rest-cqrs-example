@@ -1,7 +1,7 @@
 import { getRepository, In } from 'typeorm';
 import { Inject } from '@nestjs/common';
 
-import { AccountEntity } from 'src/accounts/infrastructure/entities/account.entity';
+import { AccountEntity } from 'src/accounts/storagelayer/entities/account.entity';
 
 import { AccountRepository } from 'src/accounts/domain/repository';
 import { Account } from 'src/accounts/domain/account';

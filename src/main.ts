@@ -7,8 +7,8 @@ import { AppModule } from './app.module';
 
 function setupSwagger(app: INestApplication): void {
   const documentBuilder = new DocumentBuilder()
-    .setTitle('Nest.js example')
-    .setDescription('This is example for nest.js')
+    .setTitle('Nestjs CQRS example')
+    .setDescription('This is example for CQRS')
     .setVersion('1.0')
     .build();
 
